@@ -62,6 +62,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+    // Matcghes any character that is not 0-9 space or pyhon
+	reg_num, err := regexp.Compile("[^0-9 -]")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	log_file, err := os.OpenFile("logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
@@ -84,14 +90,22 @@ func main() {
 			log.Fatalf("->Error: while reading the csv file. Review %#v\n", rec)
 			log.Fatal(err)
 		}
-		// Each line
+		// Check Column 1  is Alphanumeric
 		e := reg.MatchString(rec[c])
 		if e {
-			log.Print("->Warning: Special Characters found-> " + rec[c])
+			log.Print("->Warning: Special Characters found in a alphanumeric field-> " + rec[c])
 			rec[c] = reg.ReplaceAllString(rec[c], "")
 			log.Print("->Warning: Special Characters replaced-> " + rec[c])
 		}
-		// check each row is at least 3 characters log
+        // Check Column 0 is numeric
+        e1 := reg_num.MatchString(rec[0])
+        if e1 {
+			log.Print("->Warning: Special Characters found in a numeric fielf-> " + rec[0])
+			rec[0] = reg_num.ReplaceAllString(rec[0], "")
+			log.Print("->Warning: Special Characters replaced-> " + rec[0])
+
+		}
+		// check each row is at least 3 characters log. if row is higher than 24 discard characters
 		add_row = true
 		for i := 0; i < len(rec); i++ {
 			if len(rec[i]) < 3 {
