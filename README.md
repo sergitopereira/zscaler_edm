@@ -28,6 +28,11 @@ from the index tool:
 .\/zscaler_edm {PATH_TO_CSV_FILE}
 
 ```
+
+The script will generate  the following two files:
+ updated_file.csv: Updated cvs to be imported to index tool 
+ logs.txt: Log file with all the changes made
+
 # Logs
 
 Logs are saved in logs.txt file
