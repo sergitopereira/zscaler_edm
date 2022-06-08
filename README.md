@@ -30,8 +30,9 @@ from the index tool:
 ```
 
 The script will generate  the following two files:
- updated_file.csv: Updated cvs to be imported to index tool 
- logs.txt: Log file with all the changes made
+
+ - updated_file.csv: Updated cvs to be imported to index tool 
+ - logs.txt: Contains all the changes made
 
 # Logs
 
