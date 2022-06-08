@@ -24,6 +24,9 @@ wget -O zscaler_edm.exe https://raw.githubusercontent.com/sergitopereira/zscaler
 
 ./zscaler_edm {PATH_TO_CSV_FILE}
 
+from the index tool:
+.\/zscaler_edm {PATH_TO_CSV_FILE}
+
 ```
 # Logs
 
