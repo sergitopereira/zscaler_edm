@@ -25,14 +25,16 @@ wget -O zscaler_edm.exe https://raw.githubusercontent.com/sergitopereira/zscaler
 ./zscaler_edm {PATH_TO_CSV_FILE}
 
 from the index tool:
-.\/zscaler_edm {PATH_TO_CSV_FILE}
+cd /sc/data/uploads
+sudo .\/zscaler_edm {PATH_TO_CSV_FILE}
 
 ```
 
-The script will generate  the following two files:
+The script will replace  the existing file and will create logs.txt:
 
- - updated_file.csv: Updated cvs to be imported to index tool 
  - logs.txt: Contains all the changes made
+
+IMPORTANT: If script ezecuted in the index tool, it must be run from /sc/data/uploads 
 
 # Logs
 

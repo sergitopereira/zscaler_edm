@@ -32,9 +32,9 @@ func csv_read(file string) *csv.Reader {
 	return csvReader
 }
 
-func csv_write(records [][]string) {
+func csv_write(records [][]string , filename string) {
 	//function to write file to csv
-	f, err := os.Create("updated_file.csv")
+	f, err := os.Create(filename)
 
 	if err != nil {
 
@@ -131,6 +131,6 @@ func main() {
 		//
 
 	}
-	csv_write(records)
+	csv_write(records, args[1])
 
 }
