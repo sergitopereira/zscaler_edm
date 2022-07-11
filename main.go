@@ -55,8 +55,6 @@ func csv_write(records [][]string) {
 
 func main() {
 	args := os.Args
-	// column where special characters are found and will be replaced
-	c := 1
 	// Regex Any combination of letters (a-z, A-Z). Including hyphens and underscores
 	reg, err := regexp.Compile("[^a-zA-Z0-9_-]+")
 	if err != nil {
@@ -80,9 +78,16 @@ func main() {
 	// open csv
 	TerminalHelper(args)
 	csvReader := csv_read(args[1])
-
+    row :=0 
 	for {
 		rec, err := csvReader.Read()
+		if row == 0{
+			// headers
+			records = append(records, rec)
+			row +=1
+			continue
+
+		}
 		if err == io.EOF {
 			break
 		}
@@ -91,11 +96,11 @@ func main() {
 			log.Fatal(err)
 		}
 		// Check Column 1  is Alphanumeric
-		e := reg.MatchString(rec[c])
+		e := reg.MatchString(rec[1])
 		if e {
-			log.Print("->Warning: Special Characters found in a alphanumeric field-> " + rec[c])
-			rec[c] = reg.ReplaceAllString(rec[c], "")
-			log.Print("->Warning: Special Characters replaced-> " + rec[c])
+			log.Print("->Warning: Special Characters found in a alphanumeric field-> " + rec[1])
+			rec[1] = reg.ReplaceAllString(rec[1], "")
+			log.Print("->Warning: Special Characters replaced-> " + rec[1])
 		}
         // Check Column 0 is numeric
         e1 := reg_num.MatchString(rec[0])
